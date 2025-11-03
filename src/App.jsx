@@ -1,28 +1,29 @@
-import { useState } from 'react'
+import React, { useState } from 'react';
+import HeroCover from './components/HeroCover';
+import RouteSearch from './components/RouteSearch';
+import TicketPreview from './components/TicketPreview';
+import FeaturesGrid from './components/FeaturesGrid';
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [selection, setSelection] = useState({ from: 'Current Location', to: 'Majestic Bus Stand', when: 'Now' });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
-        </div>
-      </div>
-    </div>
-  )
-}
+    <div className="min-h-screen bg-neutral-950 text-white">
+      <HeroCover />
+      <RouteSearch onSearch={setSelection} />
+      <TicketPreview selection={selection} />
+      <FeaturesGrid />
 
-export default App
+      <footer className="border-t border-white/10 mt-12">
+        <div className="max-w-6xl mx-auto px-4 py-8 text-sm text-white/70 flex flex-col md:flex-row items-center justify-between gap-3">
+          <p>© {new Date().getFullYear()} Smart State Bus Ticketing · Passenger App</p>
+          <div className="flex items-center gap-4">
+            <a className="hover:text-orange-400" href="#">Privacy</a>
+            <a className="hover:text-orange-400" href="#">Terms</a>
+            <a className="hover:text-orange-400" href="#">Support</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
